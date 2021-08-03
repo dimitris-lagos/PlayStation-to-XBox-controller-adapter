@@ -11,7 +11,7 @@ In reference to the electrical connections, contrary to most of the VUSB circuit
 ![Alt text](Pictures/Connections.png?raw=true "Title")
 
 
-This project uses the VUSB library that makes the usb-incapable avr microcontrollers(atmega328p/168p etc.) able to "talk" USB 1.1. The source of the VUSB library has been modified("usbdrv/usbdrv.h", "usbdrv/usbrv.c", "usbdrv/asmcommon.inc" and "usbconfig.h") in order to send Interrupt-in/Bulk-in packets of size greater than 8 bytes which is the library limit. Specifically the XBox XID Report needs to be 20 bytes long.
+This project uses the [VUSB library](https://github.com/obdev/v-usb) that makes the usb-incapable avr microcontrollers(atmega328p/168p etc.) able to "talk" USB 1.1. The source of the VUSB library has been modified("usbdrv/usbdrv.h", "usbdrv/usbrv.c", "usbdrv/asmcommon.inc" and "usbconfig.h") in order to send Interrupt-in/Bulk-in packets of size greater than 8 bytes which is the library limit. Specifically the XBox XID Report needs to be 20 bytes long.
 Any AVR with flash greater than 4kB should be compatible with VUSB and this project. I've tested it with ATMEGA328AU and ATMEGA168-20MU , both at 16Mhz  and 5V VCC. Those chips come on the pcb of Arduino Pro Mini China Clones that are sold on ebay. One should be able to compile the program for 12Mhz-20Mhz clocks, as long as the Make File is configured acordingly and the SPI clock devider in main.c is set to produce 500kHz SPI. This is the max SPI frequency the PSX/PS2 controller can handle.
 
 
