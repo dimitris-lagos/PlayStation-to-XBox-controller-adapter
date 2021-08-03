@@ -4,8 +4,11 @@ Use this firmware to connect a PSX/PS2 controller to the Original Xbox using an 
 
 PlayStation to XBox controller adapter.
 Use this firmware to connect a PSX/PS2 controller to the Original Xbox. Analog sticks and rumble actuators work.
+
 MAKE FILE is set for ATMEGA328P @16Mhz and USBTiny programmer. AVR-GCC has to be set in the system envirnment variable. Command "make flash" compiles and flashes the hex on the avr. Also sets the fuses.
+
 In reference to the electrical connections, contrary to most of the VUSB circuits that have the mcu at 5V, that show 3V6 diodes to clamp the D- and D+ voltages, i found that those diodes are not needed. Worse, the ones i got (NXP BZV85 3V6), due to the high diode capacitance they have, made the USB not able to work at all. So if you decide to use clamping diodes, find small ones(low capacitance).
+![Alt text](Pictures/Connections.png?raw=true "Title")
 
 
 This project uses the VUSB library that makes the usb-incapable avr microcontrollers(atmega328p/168p etc.) able to "talk" USB 1.1. The source of the VUSB library has been modified("usbdrv/usbdrv.h", "usbdrv/usbrv.c", "usbdrv/asmcommon.inc" and "usbconfig.h") in order to send Interrupt-in/Bulk-in packets of size greater than 8 bytes which is the library limit. Specifically the XBox XID Report needs to be 20 bytes long.
