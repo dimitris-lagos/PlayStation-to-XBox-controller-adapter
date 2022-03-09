@@ -9,7 +9,6 @@
 
 #ifndef __usbconfig_h_included__
 #define __usbconfig_h_included__
-
 /*
 General Description:
 This file is an example configuration (with inline documentation) for the USB
@@ -162,8 +161,8 @@ section at the end of this file).
  */
  #define USB_RX_USER_HOOK(data, len)  \
 			usbRequest_t    *rs = (void *)data; \
-			DBG1(0x98, &rs->bmRequestType,1);   \
-			DBG1(0x99, &rs->bRequest,1);   \
+			DBG2(0x98, &rs->bmRequestType,1);   \
+			DBG2(0x99, &rs->bRequest,1);   \
 			if(rs->bmRequestType == 0x00){   \
 				if(rs->bRequest == 9){   \
 				}   \
@@ -179,7 +178,6 @@ section at the end of this file).
 #define USB_RESET_HOOK(resetStarts)     \
 		if(!resetStarts){\
 			DBG1(0x88,0,0);   \
-			setup_actuator();\
 			}\
 		
 /* This macro is a hook if you need to know when an USB RESET occurs. It has

@@ -1,8 +1,0 @@
-#define XBOX_DPAD_UP		0x01
-#define XBOX_DPAD_DOWN		0x02
-#define XBOX_DPAD_LEFT		0x04
-#define XBOX_DPAD_RIGHT		0x08
-#define XBOX_START			0x10
-#define XBOX_BACK			0x20
-#define XBOX_LEFT_STICK		0x40
-#define XBOX_RIGHT_STICK	0x80

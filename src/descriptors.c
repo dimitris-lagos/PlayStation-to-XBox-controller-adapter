@@ -1,6 +1,14 @@
+#include "descriptors.h"
+#include "usbdrv.h"
+
+/** Configuration descriptor structure. This descriptor, located in FLASH memory, describes the usage
+ *  of the device in one of its supported configurations, including information about any device interfaces
+ *  and endpoints. The descriptor is read out by the USB host during the enumeration process when selecting
+ *  a configuration so that the host may correctly communicate with the USB device.
+ */
 
 
-const char usbDescriptorDevice[18]PROGMEM=
+PROGMEM const char usbDescriptorDevice[] =
 {
 	0x12,        // bLength
 	0x01,        // bDescriptorType (Device)
@@ -18,21 +26,16 @@ const char usbDescriptorDevice[18]PROGMEM=
 	0x01        // bNumConfigurations 1
 };
 
-/** Configuration descriptor structure. This descriptor, located in FLASH memory, describes the usage
- *  of the device in one of its supported configurations, including information about any device interfaces
- *  and endpoints. The descriptor is read out by the USB host during the enumeration process when selecting
- *  a configuration so that the host may correctly communicate with the USB device.
- */
  
-const int usbDescriptorStringVendor[]PROGMEM={
+PROGMEM const int usbDescriptorStringVendor[]  ={
 	'M', 'i', 'c', 'r', 'o', 's', 'o', 'f', 't', ' ', 'C', 'o', 'r', 'p', '.'
 };
-const int usbDescriptorStringDevice[]PROGMEM={
+PROGMEM const int usbDescriptorStringDevice[] ={
 	'X', 'b', 'o', 'x', ' ', 'C', 'o', 'n', 't', 'r', 'o', 'l', 'l', 'e', 'r'
 };
 
 
-const char usbDescriptorConfiguration[]PROGMEM=
+PROGMEM const char usbDescriptorConfiguration[] =
 {
 //Configuration Descriptor:	(Config)
 	0x09,        // bLength
@@ -72,8 +75,8 @@ const char usbDescriptorConfiguration[]PROGMEM=
 
 };
 
-//This is an example XID descriptor report
-const char usbDescriptorHidReport[]PROGMEM=
+//The XID Descriptor Report
+PROGMEM const char usbDescriptorHidReport[] =
 {
  0x10, //bLength(16 bytes)              
  0x42, //bDescriptorType      
@@ -85,64 +88,3 @@ const char usbDescriptorHidReport[]PROGMEM=
  0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF //wAlternateProductIds (4 x 0xFFFF)
  };
  
-
-typedef struct {
-	uint8_t rid;//[0]
-	uint8_t rsize; //[1]
-	uint8_t digital_buttons;//[2]
-	uint8_t reserved_1;//[3]
-	uint8_t a;//[4]
-	uint8_t b;//[5]
-	uint8_t x;//[6]
-	uint8_t y;//[7]
-	uint8_t black;//[8]
-	uint8_t white;//[9]
-	uint8_t l;//[10]
-	uint8_t r;//[11]
-	uint8_t  l_x0;//[12] useless
-	uint8_t  l_x;//[13]
-	uint8_t  l_y0;//[14] useless
-	uint8_t  l_y;//[15]
-	uint8_t  r_x0;//[16] useless
-	uint8_t  r_x;//[17]
-	uint8_t  r_y0;//[18] useless
-	uint8_t  r_y;//[19]
-} USB_JoystickReport_Data_t;
-
-typedef struct {
-    uint8_t  rid; 
-    uint8_t  rsize; // Has to be 0x06
-	uint8_t left_actuator_strength0; //useless
-    uint8_t left_actuator_strength;
-	uint8_t right_actuator_strength0; //useless
-    uint8_t right_actuator_strength;
-} XIDGamepadOutputReport; 
- 
-#define XBOX_DPAD_UP		0x01
-#define XBOX_DPAD_DOWN		0x02
-#define XBOX_DPAD_LEFT		0x04
-#define XBOX_DPAD_RIGHT		0x08
-#define XBOX_START			0x10
-#define XBOX_BACK			0x20
-#define XBOX_LEFT_STICK		0x40
-#define XBOX_RIGHT_STICK	0x80
-
-#define PS2_DPAD_UP			(1<<4)
-#define PS2_DPAD_DOWN		(1<<6)
-#define PS2_DPAD_LEFT		(1<<7)
-#define PS2_DPAD_RIGHT		(1<<5)
-#define PS2_START			(1<<3)
-#define PS2_SELECT			(1<<0)
-#define PS2_L3				(1<<1)
-#define PS2_R3				(1<<2)
-							
-#define PS2_S				(1<<7)
-#define PS2_X				(1<<6)
-#define PS2_O				(1<<5)
-#define PS2_T				(1<<4)
-#define PS2_R1				(1<<3)
-#define PS2_L1				(1<<2)
-#define PS2_R2				(1<<1)
-#define PS2_L2				(1<<0)
-
-

@@ -12,8 +12,9 @@ FUSE_L  = # see below for fuse values for particular devices
 FUSE_H  = 
 AVRDUDE = avrdude -c usbtiny -p $(DEVICE) # edit this line for your programmer
 
-CFLAGS  = -Iusbdrv -I. -DDEBUG_LEVEL=0
-OBJECTS = usbdrv/usbdrv.o usbdrv/usbdrvasm.o usbdrv/oddebug.o main.o
+CFLAGS  = -Isrc -Ilib -Iinclude -Iusbdrv -I. -DDEBUG_LEVEL=1
+OBJECTS_S = src/main.o src/descriptors.o src/ps2.o 
+OBJECTS = usbdrv/usbdrv.o usbdrv/usbdrvasm.o usbdrv/oddebug.o $(OBJECTS_S)
 
 COMPILE = avr-gcc -Wall -Os -DF_CPU=$(F_CPU) $(CFLAGS) -mmcu=$(DEVICE)
 
@@ -123,7 +124,7 @@ flash: main.hex
 
 # rule for deleting dependent files (those which can be built by Make):
 clean:
-	rm -f main.hex main.lst main.obj main.cof main.list main.map main.eep.hex main.elf *.o usbdrv/*.o main.s usbdrv/oddebug.s usbdrv/usbdrv.s
+	rm -f main.hex main.lst main.obj main.cof main.list main.map main.eep.hex main.elf *.o usbdrv/*.o main.s usbdrv/oddebug.s usbdrv/usbdrv.s src/main.o src/descriptors.o src/ps2.o
 
 # Generic rule for compiling C files:
 .c.o:

@@ -9,7 +9,6 @@
 
 #ifndef __oddebug_h_included__
 #define __oddebug_h_included__
-
 /*
 General Description:
 This module implements a function for debug logs on the serial line of the
